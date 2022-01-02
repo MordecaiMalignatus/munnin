@@ -1,17 +1,16 @@
-# Munnin
+# Spire
 
-Or, my version of [huginn](https://github.com/huginn/huginn). It is, in
-essence, a script scheduler, task graph processor, and evaluator of such.
+A script scheduler, task graph processor, and evaluator of such.
 
 ## Architecture
 
-Munnin is written as a classic daemon, that meaning, a headless process that
+Spire is written as a classic daemon, that meaning, a headless process that
 sits in the background and Does Stuff. There's then various ways of interacting
 with the daemon.
 
 ## Interface
 
-Munnin plans to support two interfaces:
+Spire plans to support two interfaces:
 
 - A CLI that communicates with the daemon, and
 - an API that also communicates with the daemon.
@@ -30,7 +29,7 @@ The reasons are varied, but boil down to some subset of this:
 
 ### Anti-goals
 
-Stuff Munnin definitely does *not* want to be:
+Stuff Spire definitely does *not* want to be:
 
 - Scalable
 - Universal
