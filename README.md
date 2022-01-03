@@ -2,18 +2,44 @@
 
 A script scheduler, task graph processor, and evaluator of such.
 
+## Uses
+
+Spire is intended to serve as a scheduler similar to `cron`, but with some
+niceties of task-graph processing and other triggers added in. In a way, it's
+intended to be a lot like [Concourse CI](https://concourse-ci.org/), just in a
+way that is more oriented towards manual use and being customized.
+
+Things spire can do:
+
+- Run jobs. This sounds a bit trivial (you could just do it by hand in a shell),
+  but `spire-engine` offers an API on a port, meaning that with something like
+  Tailscale there's now a generic "run this thing" environment for your stuff.
+- Run jobs _but on a schedule_. It's `cron`, with the same benefits as running a
+  single job.
+- Run _graphs_ of jobs. This is where we get a bit closer to Airflow and the
+  likes, but yeah, same idea.
+
+If this sounds a lot like Concourse CI to you, yeah, me too, except this one's
+mine and it's a lot less of a pain in the ass to run as it is aimed at having
+one user per setup.
+
+This idea is vaguely inspired by [bank
+python](https://calpaterson.com/bank-python.html), a hugely integrated stack of
+software that is very different from the compartmentalised and distinct pieces
+that people normally deal with.
+
 ## Architecture
 
-Spire is written as a classic daemon, that meaning, a headless process that
-sits in the background and Does Stuff. There's then various ways of interacting
-with the daemon.
+Spire has two parts:
 
-## Interface
+- `spire-engine`: the core scheduler and job runner that Does Stuff™. This is
+  usable via a locally hosted webserver that accepts a vaguely standard API
+  thing.
+- `spire-cli`: a CLI that optimises for UX, so is less nuts and bolts.
 
-Spire plans to support two interfaces:
-
-- A CLI that communicates with the daemon, and
-- an API that also communicates with the daemon.
+`spire-engine` offering an API means that using something like Tailscale to
+securely export ports on your machines now means you have a general-purpose
+scheduler.
 
 ## Why write this?
 
